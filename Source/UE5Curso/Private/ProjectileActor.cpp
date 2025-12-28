@@ -33,20 +33,18 @@ AProjectileActor::AProjectileActor()
 		
 		RootComponent = ProjectileCollisionComponent;
 		
-		//ProjectileCollisionComponent->SetupAttachment(RootComponent);
-		//ProjectileCollisionComponent->SetCollisionProfileName("BlockAll");
 	}
 
 	if (!ProjectileMovementComponent)
 	{
 		ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("ProjectileMovementComponent");
 		//ProjectileMovementComponent->SetUpdatedComponent(ProjectileCollisionComponent);
-		ProjectileMovementComponent->InitialSpeed = 3500.0f;
-		ProjectileMovementComponent->MaxSpeed = 3500.0f;
-		ProjectileMovementComponent->bRotationFollowsVelocity = true;
+		ProjectileMovementComponent->InitialSpeed = 3000.0f;
+		ProjectileMovementComponent->MaxSpeed = 3000.0f;
+		//ProjectileMovementComponent->bRotationFollowsVelocity = true;
 		ProjectileMovementComponent->bShouldBounce = true;
-		ProjectileMovementComponent->Bounciness = 0.3f;
-		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
+		ProjectileMovementComponent->Bounciness = 0.6f;
+		ProjectileMovementComponent->ProjectileGravityScale = 1.0f;
 		
 	}
 
@@ -69,7 +67,7 @@ AProjectileActor::AProjectileActor()
 
     	ProjectileMeshComponent->SetRelativeScale3D(FVector(0.09f, 0.09f, 0.09f));
     	SetRootComponent(ProjectileMeshComponent);
-    	ProjectileMeshComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+    	ProjectileMeshComponent->SetCollisionProfileName("BlockAll");
     }
 	
 	// borramos el proyectil despues de 3 segundos
