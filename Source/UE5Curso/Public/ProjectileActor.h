@@ -21,18 +21,19 @@ public:
 	AProjectileActor();
 
 protected:
+	
 	UPROPERTY(EditDefaultsOnly, Category = Components)
-	UStaticMeshComponent* ProjectileMeshComponent;
+	USphereComponent* PCollisionComp;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Components)
+	UStaticMeshComponent* PMeshComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = Components)
-	USphereComponent* ProjectileCollisionComponent;
-
-	UPROPERTY(EditDefaultsOnly, Category = Components)
-	UProjectileMovementComponent* ProjectileMovementComponent;
+	UProjectileMovementComponent* PMovementComp;
 
 	// Projectile material
-	UPROPERTY(VisibleDefaultsOnly, Category = Movement)
-	UMaterialInstanceDynamic* ProjectileMaterialInstance;
+	//UPROPERTY(VisibleDefaultsOnly, Category = Movement)
+	//UMaterialInstanceDynamic* ProjectileMaterialInstance;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,6 +41,6 @@ protected:
 	//virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	UFUNCTION()
-	void OnProjectHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		FVector NormalImpulse, const FHitResult& Hit);
 };

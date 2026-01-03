@@ -110,6 +110,8 @@ void APlayer01::Fire()
 
 	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.Owner = this;
+	//evitamos que nuestros propios projectiles puedan hacernos daño
+	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 
 	GetWorld()->SpawnActor<AProjectileActor>(ProjectileActorClass, SpawnPos, SpawnRoot,SpawnInfo);
 }
