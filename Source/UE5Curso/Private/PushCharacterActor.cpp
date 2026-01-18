@@ -3,6 +3,7 @@
 
 #include "PushCharacterActor.h"
 #include "components/BoxComponent.h"
+#include "Components/HealthComponent.h"
 #include "GameFramework/Character.h"
 
 // Sets default values
@@ -38,11 +39,13 @@ void APushCharacterActor::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	//iniciamos una variable del jugador usando el cast en OtherActor
 	ACharacter* character = Cast<ACharacter>(OtherActor);
-	
 	if(!IsValid(character)) return;
 
 	//si se detecta a un actor haciend overlap sera empujadoo a la direccion contraria
 	character->LaunchCharacter(-OtherActor->GetActorForwardVector()*ForzeImpulse,true,false);
+	UHealthComponent* PlayerHealthComponent = character->FindComponentByClass<UHealthComponent>();
+	int restHealt = -50;
+	PlayerHealthComponent->updateCurrentHealth(restHealt);
 }
 
 //funcion para cuando el boxComponent detecte algun actor salir

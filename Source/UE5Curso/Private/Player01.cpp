@@ -5,6 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "ProjectileActor.h"
+#include "UE5Curso/Public/Components/HealthComponent.h"
 
 // Sets default values
 APlayer01::APlayer01()
@@ -25,6 +26,8 @@ APlayer01::APlayer01()
 	
 	FireSceneComponent = CreateDefaultSubobject<USceneComponent>("FireSceneComponent");
 	FireSceneComponent->SetupAttachment(RootComponent);
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>("HealthComponent");
 }
 
 // Called when the game starts or when spawned

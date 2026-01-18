@@ -10,6 +10,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class AProjectileActor;
+class UHealthComponent;
 
 UCLASS()
 class UE5CURSO_API APlayer01 : public ACharacter
@@ -30,6 +31,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = Components)
 	USceneComponent* FireSceneComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = Components)
+	UHealthComponent* HealthComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputMappingContext* DefaultMappingContext;
