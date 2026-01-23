@@ -1,7 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "PushCharacterActor.h"
+#include "Actors/PushCharacterActor.h"
 #include "components/BoxComponent.h"
 #include "Components/HealthComponent.h"
 #include "GameFramework/Character.h"
@@ -54,11 +52,3 @@ void APushCharacterActor::EndOverlap(UPrimitiveComponent* OverlappedComponent, A
 {
 	GEngine->AddOnScreenDebugMessage(-1,10.f,FColor::Blue,TEXT("Exit Exit"));
 }
-
-// Called every frame
-/*void APushCharacterActor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}*/
-

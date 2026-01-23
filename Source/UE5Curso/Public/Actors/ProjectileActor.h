@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -7,9 +5,6 @@
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "ProjectileActor.generated.h"
-
-//class USphereComponent;
-//class UProjectileMovementComponent;
 
 UCLASS()
 class UE5CURSO_API AProjectileActor : public AActor
@@ -30,10 +25,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = Components)
 	UProjectileMovementComponent* PMovementComp;
-
-	// Projectile material
-	//UPROPERTY(VisibleDefaultsOnly, Category = Movement)
-	//UMaterialInstanceDynamic* ProjectileMaterialInstance;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

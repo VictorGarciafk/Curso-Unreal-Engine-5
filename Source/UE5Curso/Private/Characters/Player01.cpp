@@ -1,20 +1,19 @@
 
-#include "Player01.h"
+#include "Characters/Player01.h"
+#include "Actors/ProjectileActor.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "ProjectileActor.h"
-#include "UE5Curso/Public/Components/HealthComponent.h"
+#include "Components/HealthComponent.h"
+#include "Components/GunComponent.h"
 
 // Sets default values
 APlayer01::APlayer01()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
 	
-	//
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
 	SpringArmComponent->SetupAttachment(RootComponent);
 	SpringArmComponent->TargetArmLength = 400.0f;
@@ -23,9 +22,12 @@ APlayer01::APlayer01()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	CameraComponent->bUsePawnControlRotation = false;
+
+	GunComponent = CreateDefaultSubobject<UGunComponent>("GunComponent");
+	GunComponent->SetupAttachment(RootComponent);
 	
 	FireSceneComponent = CreateDefaultSubobject<USceneComponent>("FireSceneComponent");
-	FireSceneComponent->SetupAttachment(RootComponent);
+	FireSceneComponent->SetupAttachment(GunComponent);
 
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>("HealthComponent");
 }
@@ -43,22 +45,7 @@ void APlayer01::BeginPlay()
 	if (!IsValid(Subsystem)) return;
 
 	Subsystem->AddMappingContext(DefaultMappingContext,0);
-	/*
-	//mostramos en pantalla un mensaje al iniciar el juego
-	GEngine->AddOnScreenDebugMessage(-1,10.0f, FColor::Blue, TEXT("Hellouda Player"));
-
-	//Escribimos en el archivo LOG un mensaje al ejecutar el juego
-	UE_LOG(LogTemp, Log, TEXT("Hellouda Player"));
-	*/
-	
 }
-
-// Called every frame
-/*void APlayer01::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}*/
 
 // Called to bind functionality to input
 void APlayer01::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -103,12 +90,11 @@ void APlayer01::Look(const FInputActionValue& InputActionValue)
 
 	//eje y(Vertical)
 	AddControllerPitchInput(LookVector.Y);
-
 }
 
 void APlayer01::Fire()
 {
-	FVector SpawnPos = FireSceneComponent->GetComponentLocation();
+	/*FVector SpawnPos = FireSceneComponent->GetComponentLocation();
 	FRotator SpawnRoot = FireSceneComponent->GetComponentRotation();
 
 	FActorSpawnParameters SpawnInfo;
@@ -116,5 +102,7 @@ void APlayer01::Fire()
 	//evitamos que nuestros propios projectiles puedan hacernos daño
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 
-	GetWorld()->SpawnActor<AProjectileActor>(ProjectileActorClass, SpawnPos, SpawnRoot,SpawnInfo);
+	GetWorld()->SpawnActor<AProjectileActor>(ProjectileActorClass, SpawnPos, SpawnRoot,SpawnInfo);*/
+
+	GunComponent->Fire(FireSceneComponent);
 }

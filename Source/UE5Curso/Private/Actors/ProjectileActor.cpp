@@ -1,10 +1,7 @@
 
-
-
-#include "ProjectileActor.h"
+#include "Actors/ProjectileActor.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-
 
 // Sets default values
 AProjectileActor::AProjectileActor()

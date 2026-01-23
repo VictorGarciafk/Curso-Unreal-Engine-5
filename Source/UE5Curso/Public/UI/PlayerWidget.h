@@ -18,8 +18,12 @@ class UE5CURSO_API UPlayerWidget : public UUserWidget
 protected:
 	UPROPERTY(editanywhere, meta=(BindWidget))
 	UTextBlock* PlayerHealthText;
+	
+	UFUNCTION()
+	void HandleUpdateHealth();
 
-public:
+	UFUNCTION()
 	void UpdateHealthText(int32 CurrentHealth);
 	
+	virtual void NativeOnInitialized() override;
 };

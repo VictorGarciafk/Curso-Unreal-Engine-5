@@ -1,16 +1,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/GunComponent.h"
 #include "GameFramework/Character.h"
 #include "Player01.generated.h"
 
 struct FInputActionValue;
+class AProjectileActor;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
-class AProjectileActor;
 class UHealthComponent;
+class UGunComponent;
 
 UCLASS()
 class UE5CURSO_API APlayer01 : public ACharacter
@@ -22,6 +24,9 @@ public:
 	APlayer01();
 
 protected:
+
+	UPROPERTY(EditDefaultsOnly, Category = Components)
+	UGunComponent* GunComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = Components)
 	USpringArmComponent* SpringArmComponent;
@@ -63,12 +68,7 @@ protected:
 	void Fire();
 public:	
 
-	// Called every frame
-	//virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	
 	
 };
