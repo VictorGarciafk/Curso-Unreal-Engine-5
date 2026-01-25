@@ -32,7 +32,10 @@ protected:
 	USpringArmComponent* SpringArmComponent;
 	
 	UPROPERTY(EditDefaultsOnly, Category = Components)
-	UCameraComponent* CameraComponent;
+	UCameraComponent* ThirdCameraComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = Components)
+	UCameraComponent* FirstCameraComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = Components)
 	USceneComponent* FireSceneComponent;
@@ -55,6 +58,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* FireAction;
 
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* ChangeCameraAction;
+
 	UPROPERTY(EditDefaultsOnly, Category = ProjectileConfig)
 	TSubclassOf<AProjectileActor> ProjectileActorClass;
 
@@ -63,6 +69,8 @@ protected:
 
 	void Move(const FInputActionValue& value);
 	void Look(const FInputActionValue& value);
+
+	void ChangeFirstCamera();
 
 	UFUNCTION()
 	void Fire();

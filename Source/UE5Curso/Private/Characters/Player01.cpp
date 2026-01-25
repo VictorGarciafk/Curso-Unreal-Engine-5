@@ -19,9 +19,13 @@ APlayer01::APlayer01()
 	SpringArmComponent->TargetArmLength = 400.0f;
 	SpringArmComponent->bUsePawnControlRotation = true;
 
-	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
-	CameraComponent->SetupAttachment(SpringArmComponent);
-	CameraComponent->bUsePawnControlRotation = false;
+	ThirdCameraComponent = CreateDefaultSubobject<UCameraComponent>("ThirdCameraComponent");
+	ThirdCameraComponent->SetupAttachment(SpringArmComponent);
+	ThirdCameraComponent->bUsePawnControlRotation = false;
+
+	FirstCameraComponent = CreateDefaultSubobject<UCameraComponent>("FirstCameraComponent");
+	FirstCameraComponent->SetupAttachment(GetMesh(), "head");
+	FirstCameraComponent->bUsePawnControlRotation = true;
 
 	GunComponent = CreateDefaultSubobject<UGunComponent>("GunComponent");
 	GunComponent->SetupAttachment(RootComponent);
@@ -62,6 +66,8 @@ void APlayer01::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 	EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &APlayer01::Fire);
+
+	EnhancedInputComponent->BindAction(ChangeCameraAction, ETriggerEvent::Started, this, &APlayer01::ChangeFirstCamera);
 }
 
 void APlayer01::Move(const FInputActionValue& InputActionValue) {
@@ -90,6 +96,25 @@ void APlayer01::Look(const FInputActionValue& InputActionValue)
 
 	//eje y(Vertical)
 	AddControllerPitchInput(LookVector.Y);
+}
+
+bool bCamera = true;
+void APlayer01::ChangeFirstCamera()
+{
+	if (bCamera == true){
+		ThirdCameraComponent->SetActive(false);
+		FirstCameraComponent->SetActive(true);
+
+		bUseControllerRotationYaw = true;
+		
+	}else{
+		FirstCameraComponent->SetActive(false);
+		ThirdCameraComponent->SetActive(true);
+
+		bUseControllerRotationYaw = false;
+	}
+
+	bCamera = !bCamera;
 }
 
 void APlayer01::Fire()
