@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Player01.h"
 #include "Animation/AnimInstance.h"
 #include "CharacterAnimInstance.generated.h"
 
@@ -15,6 +16,9 @@ class UE5CURSO_API UCharacterAnimInstance : public UAnimInstance
 		UPROPERTY()
 		UCharacterMovementComponent* CharacterMovementComponent;
 
+		UPROPERTY()
+		APlayer01* Player01;
+
 		UPROPERTY(BlueprintReadOnly)
 		bool bShouldBeMove = false;
 
@@ -26,6 +30,9 @@ class UE5CURSO_API UCharacterAnimInstance : public UAnimInstance
 	
 		UPROPERTY(BlueprintReadOnly)
 		float ZVelocity;
+
+		UPROPERTY(BlueprintReadOnly)
+		float XRotator;
 
 		virtual void NativeBeginPlay() override;
 		virtual void NativeUpdateAnimation(float DeltaSeconds) override;
